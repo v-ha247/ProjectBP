@@ -6,8 +6,8 @@ import imutils
 hog = cv2.HOGDescriptor()
 hog.setSVMDetector(cv2.HOGDescriptor_getDefaultPeopleDetector())
 
-cap = cv2.VideoCapture("D:/System/OneDrive/Obrázky/silvestr/20181231_205201.mp4")
-# cap = cv2.VideoCapture(0)
+# cap = cv2.VideoCapture("D:/System/OneDrive/Obrázky/silvestr/20181231_205201.mp4")
+cap = cv2.VideoCapture(0)
 
 def person_detect_hog(img):
     bounding_box, weights = hog.detectMultiScale(img, winStride = (4, 4))
