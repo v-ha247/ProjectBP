@@ -1,8 +1,8 @@
 import numpy as np
 import cv2
 import time
-import camControl
-import pantiltControl
+import camControl as camControl
+import pantiltControl as pantiltControl
 
 def check_time(duration, old_time):
     current_time = time.time()

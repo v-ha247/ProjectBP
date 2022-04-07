@@ -1,8 +1,8 @@
 import numpy as np
 import cv2
 import time
-import camControl
-import pantiltControl
+import camControl as camControl
+import pantiltControl as pantiltControl
 
 def check_time(duration, old_time):
     current_time = time.time()
@@ -11,7 +11,7 @@ def check_time(duration, old_time):
         return True, old_time
     return False, old_time
 
-net = cv2.dnn.readNetFromCaffe('models/MobileNetSSD_deploy.prototxt', 'models/MobileNetSSD_deploy.caffemodel')
+net = cv2.dnn.readNetFromCaffe('../models/MobileNetSSD_deploy.prototxt', '../models/MobileNetSSD_deploy.caffemodel')
 
 classes =  ["background", "aeroplane", "bicycle", "bird", "boat", "bottle", "bus", "car", "cat", "chair", "cow", 
             "diningtable",  "dog", "horse", "motorbike", "person", "pottedplant", "sheep", "sofa", "train", "tvmonitor"]

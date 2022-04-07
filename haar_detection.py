@@ -61,7 +61,9 @@ while(True):
 
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     persons = person_detect_haar_body(gray)
-
+    print(persons)
+    if persons != ():
+            print(persons[0])
     for (x, y, w, h) in persons:        
         cv2.rectangle(frame, (x, y), (x + w, y + h), (255,0,0), 2) # color in BGR not RGB, idk y
 

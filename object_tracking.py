@@ -1,52 +1,129 @@
 import cv2
+import object_detection
+import time
 
-# cap = cv2.VideoCapture("D:/System/OneDrive/Obrázky/silvestr/20181231_205201.mp4")
+def check_time(duration, old_time):
+    current_time = time.time()
+    if current_time - old_time > duration:
+        return True
+    return False
+
+detection_types = ['VIOLAJONES', 'HOGDESCRIPTOR','YOLO', 'SSD']
+detection_type = detection_types[3]
+
+# tracker_types = ['BOOSTING', 'TLD', 'MEDIANFLOW', 'MOSSE']
+# tracker_type = tracker_types[3]
+tracker_types = ['BOOSTING', 'MIL','KCF', 'TLD', 'MEDIANFLOW', 'GOTURN', 'MOSSE', 'CSRT']
+tracker_type = tracker_types[6]
+
+def init_detector(detection_type):
+    if detection_type == 'VIOLAJONES':
+        detector = object_detection.ViolaJones()
+    if detection_type == 'HOGDESCRIPTOR':
+        detector = object_detection.HogDescriptor()
+    if detection_type == 'YOLO':
+        detector = object_detection.Yolo()
+    if detection_type == 'SSD':
+        detector = object_detection.SSD()
+    return detector
+
+def init_tracker(tracker_type):
+    # if tracker_type == 'BOOSTING':
+    #     tracker = cv2.legacy.TrackerBoosting_create()
+    # if tracker_type == 'TLD':
+    #     tracker = cv2.legacy.TrackerTLD_create() 
+    # if tracker_type == 'MEDIANFLOW':
+    #     tracker = cv2.legacy.TrackerMedianFlow_create() 
+    # if tracker_type == 'MOSSE':
+    #     tracker = cv2.legacy.TrackerMOSSE_create()
+    if tracker_type == 'BOOSTING':
+        tracker = cv2.legacy.TrackerBoosting_create()
+    if tracker_type == 'MIL':
+        tracker = cv2.TrackerMIL_create() 
+    if tracker_type == 'KCF':
+        tracker = cv2.TrackerKCF_create() 
+    if tracker_type == 'TLD':
+        tracker = cv2.legacy.TrackerTLD_create() 
+    if tracker_type == 'MEDIANFLOW':
+        tracker = cv2.legacy.TrackerMedianFlow_create() 
+    if tracker_type == 'GOTURN':
+        tracker = cv2.TrackerGOTURN_create()
+    if tracker_type == 'MOSSE':
+        tracker = cv2.legacy.TrackerMOSSE_create()
+    if tracker_type == "CSRT":
+        tracker = cv2.TrackerCSRT_create()
+    return tracker
+
 cap = cv2.VideoCapture(0)
 
-ret, frame1 = cap.read()
-ret, frame2 = cap.read()
-while True:  
-    gray1 = cv2.cvtColor(frame1, cv2.COLOR_BGR2GRAY)
-    gray2 = cv2.cvtColor(frame2, cv2.COLOR_BGR2GRAY)
+detecting = True
+tracking = False
+# reset = False
+fps = 0
 
-    diff = cv2.absdiff(gray1, gray2)
-    # cv2.imshow("diff", cv2.resize(diff, (1280, 720)))
+time.sleep(3)
+print("Get ready")
 
-    blur = cv2.GaussianBlur(diff, (5, 5), 0) 
-    # cv2.imshow("blur", cv2.resize(blur, (1280, 720)))
-    
-    _ , thresholdimg = cv2.threshold(blur, 20, 255, cv2.THRESH_BINARY)
-    # cv2.imshow("thresholdimg", cv2.resize(thresholdimg, (1280, 720)))
-
-    # dilated = cv2.dilate(thresholdimg, None, iterations=3)
-    # cv2.imshow("dilated", cv2.resize(dilated, (1280, 720)))
-
-    contours, _ = cv2.findContours(thresholdimg, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-    motion = False
-    area = ()
-    if contours != ():
-        biggest_motion = 2000
-        for c in contours:
-            found_area = cv2.contourArea(c)   
-            if found_area > biggest_motion:
-                biggest_motion = found_area
-                area = cv2.boundingRect(c)
-                motion = True       
-        else:
-            motion_center = ()
-        cv2.drawContours(frame2, contours, -1, (0, 255, 0), 2)
-    if motion:
-        (x, y, w, h) = area
-        cv2.rectangle(frame2, (x, y), (x + w, y + h), (255,0,0), 2) 
-
-    cv2.imshow("Frame", cv2.resize(frame2, (1280, 720)))
-    if cv2.waitKey(20) & 0xFF == ord('q'):
-        break
-    
-    frame2 = frame1
-    ret, frame1 = cap.read()
+last_tracking = time.time()
+detector = init_detector(detection_type)
+tracker = init_tracker(tracker_type)
+while True:
+    ret, frame = cap.read()
     if not ret:
         continue
+    
+    if detecting:
+        timer = cv2.getTickCount()
+        roi = detector.detect(frame)
+        fps = cv2.getTickFrequency() / (cv2.getTickCount() - timer)
+        if roi[0] != -1:
+            (x, y, w, h) = roi
+            # cv2.rectangle(frame, (x, y), (x + w, y + h), (255,192,203), 2)
+            detecting = False
+
+    if not detecting and not tracking:
+        (x, y, w, h) = roi       
+        ret = tracker.init(frame, (x, y, w, h))
+        if ret:
+            tracking = True
+        else:
+            detecting = True
+
+    if tracking:
+        timer = cv2.getTickCount()
+        ret, bbox = tracker.update(frame)
+        fps = cv2.getTickFrequency() / (cv2.getTickCount() - timer)
+        if ret:
+            (x, y, w, h) = bbox
+            cv2.rectangle(frame, (int(x), int(y)), (int(x + w), int(y + h)), (255,192,203), 2)
+            last_tracking = time.time()
+        else:
+            cv2.putText(frame, "Tracking failure detected", (10,140), cv2.FONT_HERSHEY_SIMPLEX, 0.5,(0,0,255), 2)
+            reset = check_time(5, last_tracking)
+            if reset:
+                detecting = True
+                tracking = False
+                tracker = init_tracker(tracker_type)
+
+    cv2.putText(frame, detection_type + " Detector", (10,20), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (50,170,50), 1)
+    cv2.putText(frame, tracker_type + " Tracker", (10,50), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (50,170,50), 1)
+    cv2.putText(frame, "FPS : " + str(int(fps)), (10,80), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (50,170,50), 1)
+    if detecting:
+        cv2.putText(frame, "Detecting", (10,110), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (50,170,50), 1)
+    if tracking:
+        cv2.putText(frame, "Tracking", (10,110), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (50,170,50), 1)
+    cv2.imshow("Frame", cv2.resize(frame, (1280, 720)))
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
+    if cv2.waitKey(1) & 0xFF == ord('r'):
+        old_time = time.time()
+        print("restarting...")
+        while True:
+            reset = check_time(3, old_time)
+            if reset:
+                detecting = True
+                tracking = False
+                tracker = init_tracker(tracker_type)
+                break
 
 cap.release()
-cv2.destroyAllWindows()

@@ -22,8 +22,8 @@ while(True):
     # frame = cv2.resize(frame, (320, 208))   
     frame = imutils.resize(frame, width=min(400, frame.shape[1]))
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-    bounding_box = person_detect_hog(frame)
-    
+    bounding_box = person_detect_hog(gray)
+
     for (x, y, w, h) in bounding_box:
         cv2.rectangle(frame, (x, y), (x + w, y + h), (255,0,0), 2)
 

@@ -1,8 +1,8 @@
 import numpy as np
 import cv2
 import time
-import camControl
-import pantiltControl
+import camControl as camControl
+import pantiltControl as pantiltControl
 
 def check_time(duration, old_time):
     current_time = time.time()
@@ -11,7 +11,7 @@ def check_time(duration, old_time):
         return True, old_time
     return False, old_time
 
-net = cv2.dnn.readNetFromDarknet("models/yolov3-tiny.cfg", "models/yolov3-tiny.weights")
+net = cv2.dnn.readNetFromDarknet("../models/yolov3-tiny.cfg", "../models/yolov3-tiny.weights")
 classes = []
 with open("models/coco.names","r") as f:
     classes = [line.strip() for line in f.readlines()]

@@ -1,8 +1,8 @@
 import numpy as np
 import cv2
 import time
-import camControl
-import pantiltControl
+import camControl as camControl
+import pantiltControl as pantiltControl
 
 def person_detect_haar_body(img, scaleFactor=1.4, minNeighbors=2):
     ffd_faces = frontalface_default_cascade.detectMultiScale(img, scaleFactor, minNeighbors)
@@ -56,11 +56,11 @@ def check_time(duration, old_time):
 
 
 # haar cascades
-frontalface_default_cascade = cv2.CascadeClassifier('data/haarcascade_frontalface_default.xml')
-frontalface_alt2_cascade = cv2.CascadeClassifier('data/haarcascade_frontalface_alt2.xml')
-profileface_cascade = cv2.CascadeClassifier('data/haarcascade_profileface.xml')
-upperbody_cascade = cv2.CascadeClassifier('data/haarcascade_upperbody.xml')
-fullbody_cascade = cv2.CascadeClassifier('data/haarcascade_fullbody.xml')
+frontalface_default_cascade = cv2.CascadeClassifier('../data/haarcascade_frontalface_default.xml')
+frontalface_alt2_cascade = cv2.CascadeClassifier('../data/haarcascade_frontalface_alt2.xml')
+profileface_cascade = cv2.CascadeClassifier('../data/haarcascade_profileface.xml')
+upperbody_cascade = cv2.CascadeClassifier('../data/haarcascade_upperbody.xml')
+fullbody_cascade = cv2.CascadeClassifier('../data/haarcascade_fullbody.xml')
 
 pan_pin = 17
 tilt_pin = 27
