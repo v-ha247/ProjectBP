@@ -1,0 +1,194 @@
+Viola Jones Detector
+VIOLAJONES = 0 - time: 0.519 seconds
+VIOLAJONES = 1 - time: 0.541 seconds
+VIOLAJONES = 2 - time: 0.404 seconds
+VIOLAJONES = 3 - time: 0.454 seconds
+VIOLAJONES = 4 - time: 0.43 seconds
+VIOLAJONES = 5 - time: 0.415 seconds
+VIOLAJONES = 6 - time: 0.61 seconds
+VIOLAJONES = 7 - time: 0.592 seconds
+VIOLAJONES = 8 - time: 0.445 seconds
+VIOLAJONES = 9 - time: 0.435 seconds
+Viola Jones Detector
+VIOLAJONES = 0 - time: 0.631 seconds
+VIOLAJONES = 1 - time: 0.607 seconds
+VIOLAJONES = 2 - time: 0.456 seconds
+VIOLAJONES = 3 - time: 0.496 seconds
+VIOLAJONES = 4 - time: 0.504 seconds
+VIOLAJONES = 5 - time: 0.45 seconds
+VIOLAJONES = 6 - time: 0.439 seconds
+VIOLAJONES = 7 - time: 0.47 seconds
+VIOLAJONES = 8 - time: 0.47 seconds
+VIOLAJONES = 9 - time: 0.457 seconds
+Viola Jones Detector
+VIOLAJONES = 0 - time: 0.873 seconds
+VIOLAJONES = 1 - time: 0.949 seconds
+VIOLAJONES = 2 - time: 0.752 seconds
+VIOLAJONES = 3 - time: 0.789 seconds
+VIOLAJONES = 4 - time: 0.917 seconds
+VIOLAJONES = 5 - time: 0.76 seconds
+VIOLAJONES = 6 - time: 0.756 seconds
+VIOLAJONES = 7 - time: 0.756 seconds
+VIOLAJONES = 8 - time: 0.858 seconds
+VIOLAJONES = 9 - time: 0.806 seconds
+Viola Jones Detector
+VIOLAJONES = 0 - time: 0.787 seconds
+VIOLAJONES = 1 - time: 0.772 seconds
+VIOLAJONES = 2 - time: 0.693 seconds
+VIOLAJONES = 3 - time: 0.701 seconds
+VIOLAJONES = 4 - time: 0.726 seconds
+VIOLAJONES = 5 - time: 0.698 seconds
+VIOLAJONES = 6 - time: 0.618 seconds
+VIOLAJONES = 7 - time: 0.722 seconds
+VIOLAJONES = 8 - time: 0.638 seconds
+VIOLAJONES = 9 - time: 0.629 seconds
+MaskRCNN Detector
+MASKRCNN = 0 - time: 62.539 seconds
+MASKRCNN = 1 - time: 68.443 seconds
+MASKRCNN = 2 - time: 72.713 seconds
+MASKRCNN = 3 - time: 74.271 seconds
+MASKRCNN = 4 - time: 77.864 seconds
+MASKRCNN = 5 - time: 78.655 seconds
+MASKRCNN = 6 - time: 80.583 seconds
+MASKRCNN = 7 - time: 84.228 seconds
+MASKRCNN = 8 - time: 82.151 seconds
+MASKRCNN = 9 - time: 84.564 seconds
+MaskRCNN Detector
+MASKRCNN = 0 - time: 81.015 seconds
+MASKRCNN = 1 - time: 83.336 seconds
+MASKRCNN = 2 - time: 86.631 seconds
+MASKRCNN = 3 - time: 84.328 seconds
+MASKRCNN = 4 - time: 84.342 seconds
+MASKRCNN = 5 - time: 86.37 seconds
+MASKRCNN = 6 - time: 84.626 seconds
+MASKRCNN = 7 - time: 83.891 seconds
+MASKRCNN = 8 - time: 84.691 seconds
+MASKRCNN = 9 - time: 84.063 seconds
+MaskRCNN Detector
+MASKRCNN = 0 - time: 89.434 seconds
+MASKRCNN = 1 - time: 89.376 seconds
+MASKRCNN = 2 - time: 90.202 seconds
+MASKRCNN = 3 - time: 92.631 seconds
+MASKRCNN = 4 - time: 91.802 seconds
+MASKRCNN = 5 - time: 91.707 seconds
+MASKRCNN = 6 - time: 91.105 seconds
+MASKRCNN = 7 - time: 90.751 seconds
+MASKRCNN = 8 - time: 92.068 seconds
+MASKRCNN = 9 - time: 95.382 seconds
+MaskRCNN Detector
+MASKRCNN = 0 - time: 87.457 seconds
+MASKRCNN = 1 - time: 84.937 seconds
+MASKRCNN = 2 - time: 86.803 seconds
+MASKRCNN = 3 - time: 92.83 seconds
+MASKRCNN = 4 - time: 91.241 seconds
+MASKRCNN = 5 - time: 89.709 seconds
+MASKRCNN = 6 - time: 90.143 seconds
+MASKRCNN = 7 - time: 88.132 seconds
+MASKRCNN = 8 - time: 87.558 seconds
+MASKRCNN = 9 - time: 87.296 seconds
+Yolo Detector
+YOLO = 0 - time: 2.634 seconds
+YOLO = 1 - time: 2.898 seconds
+YOLO = 2 - time: 2.909 seconds
+YOLO = 3 - time: 2.936 seconds
+YOLO = 4 - time: 3.165 seconds
+YOLO = 5 - time: 2.977 seconds
+YOLO = 6 - time: 2.978 seconds
+YOLO = 7 - time: 3.004 seconds
+YOLO = 8 - time: 3.315 seconds
+YOLO = 9 - time: 2.895 seconds
+Yolo Detector
+YOLO = 0 - time: 3.087 seconds
+YOLO = 1 - time: 3.213 seconds
+YOLO = 2 - time: 3.031 seconds
+YOLO = 3 - time: 3.028 seconds
+YOLO = 4 - time: 3.19 seconds
+YOLO = 5 - time: 2.922 seconds
+YOLO = 6 - time: 3.126 seconds
+YOLO = 7 - time: 2.999 seconds
+YOLO = 8 - time: 2.878 seconds
+YOLO = 9 - time: 3.168 seconds
+Yolo Detector
+YOLO = 0 - time: 3.154 seconds
+YOLO = 1 - time: 3.196 seconds
+YOLO = 2 - time: 2.924 seconds
+YOLO = 3 - time: 2.962 seconds
+YOLO = 4 - time: 2.9 seconds
+YOLO = 5 - time: 3.157 seconds
+YOLO = 6 - time: 2.905 seconds
+YOLO = 7 - time: 2.997 seconds
+YOLO = 8 - time: 3.192 seconds
+YOLO = 9 - time: 2.915 seconds
+Yolo Detector
+YOLO = 0 - time: 2.917 seconds
+YOLO = 1 - time: 3.424 seconds
+YOLO = 2 - time: 3.079 seconds
+YOLO = 3 - time: 3.192 seconds
+YOLO = 4 - time: 3.359 seconds
+YOLO = 5 - time: 3.003 seconds
+YOLO = 6 - time: 2.863 seconds
+YOLO = 7 - time: 2.91 seconds
+YOLO = 8 - time: 2.783 seconds
+YOLO = 9 - time: 3.164 seconds
+SSD Detector
+SSD = 0 - time: 1.039 seconds
+SSD = 1 - time: 1.291 seconds
+SSD = 2 - time: 1.092 seconds
+SSD = 3 - time: 0.881 seconds
+SSD = 4 - time: 1.153 seconds
+SSD = 5 - time: 1.369 seconds
+SSD = 6 - time: 1.09 seconds
+SSD = 7 - time: 1.039 seconds
+SSD = 8 - time: 0.998 seconds
+SSD = 9 - time: 1.257 seconds
+SSD Detector
+SSD = 0 - time: 1.141 seconds
+SSD = 1 - time: 1.453 seconds
+SSD = 2 - time: 1.15 seconds
+SSD = 3 - time: 0.971 seconds
+SSD = 4 - time: 1.025 seconds
+SSD = 5 - time: 1.127 seconds
+SSD = 6 - time: 1.1 seconds
+SSD = 7 - time: 1.211 seconds
+SSD = 8 - time: 1.135 seconds
+SSD = 9 - time: 0.99 seconds
+SSD Detector
+SSD = 0 - time: 1.197 seconds
+SSD = 1 - time: 1.285 seconds
+SSD = 2 - time: 0.971 seconds
+SSD = 3 - time: 1.213 seconds
+SSD = 4 - time: 1.29 seconds
+SSD = 5 - time: 1.021 seconds
+SSD = 6 - time: 1.059 seconds
+SSD = 7 - time: 0.918 seconds
+SSD = 8 - time: 1.361 seconds
+SSD = 9 - time: 1.09 seconds
+SSD Detector
+SSD = 0 - time: 1.27 seconds
+SSD = 1 - time: 1.326 seconds
+SSD = 2 - time: 1.178 seconds
+SSD = 3 - time: 1.059 seconds
+SSD = 4 - time: 1.153 seconds
+SSD = 5 - time: 0.999 seconds
+SSD = 6 - time: 0.982 seconds
+SSD = 7 - time: 1.106 seconds
+SSD = 8 - time: 1.192 seconds
+SSD = 9 - time: 1.274 seconds
+
+
+video:video1, avg:3.4901960784313726, frames:816
+video:video1, avg:26.834558823529413, frames:816
+video:video1, avg:3.422794117647059, frames:816
+video:video1, avg:35.939950980392155, frames:816
+video:video2, avg:3.027829313543599, frames:539
+video:video2, avg:33.77365491651206, frames:539
+video:video2, avg:3.0630797773654916, frames:539
+video:video2, avg:34.28014842300556, frames:539
+video:video3, avg:3.047422680412371, frames:485
+video:video3, avg:26.36701030927835, frames:485
+video:video3, avg:3.020618556701031, frames:485
+video:video3, avg:33.52783505154639, frames:485
+video:video4, avg:3.2586427656850194, frames:781
+video:video4, avg:26.403329065300895, frames:781
+video:video4, avg:3.1523687580025608, frames:781
+video:video4, avg:31.56978233034571, frames:781

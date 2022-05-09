@@ -4,23 +4,35 @@ import objectDetection
 import controlCam
 import controlServos
 
+DEBUG = True
+
 def check_time(duration, old_time):
     current_time = time.time()
     if current_time - old_time > duration:
         return True, time.time()
     return False, old_time
 
-detection_types = ['VIOLAJONES', 'HOGDESCRIPTOR','YOLO', 'SSD']
-detection_type = detection_types[3]
+detection_types = ['VIOLAJONES', 'MASKRCNN','YOLO', 'SSD']
+tracker_types = ['BOOSTING', 'MEDIANFLOW', 'TLD', 'MOSSE']
 
-tracker_types = ['BOOSTING', 'TLD', 'MEDIANFLOW', 'MOSSE']
-tracker_type = tracker_types[2]
+while True:
+    num = int(input("Choose detection algorithm:\n1: Viola Jones\n2: Mask R-CNN\n3: YOLO\n4: SSD\n")) - 1
+    if num in [0, 1, 2, 3]:
+        detection_type = detection_types[num]
+        break
+    print("Invalid input")
+while True:
+    num = int(input("Choose tracking algorithm:\n1: BOOSTING\n2: MEDIANFLOW\n3: TLD\n4: MOSSE\n")) - 1
+    if num in [0, 1, 2, 3]:
+        tracker_type = tracker_types[num]
+        break
+    print("Invalid input")
 
 def init_detector(detection_type):
     if detection_type == 'VIOLAJONES':
         detector = objectDetection.ViolaJones()
-    if detection_type == 'HOGDESCRIPTOR':
-        detector = objectDetection.HogDescriptor()
+    if detection_type == 'MASKRCNN':
+        detector = objectDetection.MaskRCNN()
     if detection_type == 'YOLO':
         detector = objectDetection.Yolo()
     if detection_type == 'SSD':
@@ -30,10 +42,10 @@ def init_detector(detection_type):
 def init_tracker(tracker_type):
     if tracker_type == 'BOOSTING':
         tracker = cv2.legacy.TrackerBoosting_create()
-    if tracker_type == 'TLD':
-        tracker = cv2.legacy.TrackerTLD_create() 
     if tracker_type == 'MEDIANFLOW':
         tracker = cv2.legacy.TrackerMedianFlow_create() 
+    if tracker_type == 'TLD':
+        tracker = cv2.legacy.TrackerTLD_create() 
     if tracker_type == 'MOSSE':
         tracker = cv2.legacy.TrackerMOSSE_create()
     return tracker
@@ -55,19 +67,21 @@ detecting = True
 tracking = False
 fps = 0
 
+detector = init_detector(detection_type)
+tracker = init_tracker(tracker_type)
+
 print("\nGet ready")
 time.sleep(3)
 
 last_tracking = time.time()
-detector = init_detector(detection_type)
-tracker = init_tracker(tracker_type)
 move_time = time.time()
 while True:
     frame = cam.get_frame()
     
     if detecting:
         timer = cv2.getTickCount()
-        roi = detector.detect(frame)
+        print("Detecting")
+        roi = detector.detect_object(frame)
         fps = cv2.getTickFrequency() / (cv2.getTickCount() - timer)
         if roi[0] != -1:
             (x, y, w, h) = roi
@@ -88,8 +102,8 @@ while True:
         fps = cv2.getTickFrequency() / (cv2.getTickCount() - timer)
         if ret:
             (x, y, w, h) = bbox
-            cv2.rectangle(frame, (int(x), int(y)), (int(x + w), int(y + h)), (255,192,203), 2)
-            if not servos.get_status():
+            cv2.rectangle(frame, (int(x), int(y)), (int(x + w), int(y + h)), (0,0,0), 2)
+            if not servos.moving():
                 servos.move(int(x), int(y), int(w), int(h))
             last_tracking = time.time()
         else:
@@ -100,17 +114,19 @@ while True:
                 detecting = True
                 tracking = False
                 tracker = init_tracker(tracker_type)
-
-    cv2.putText(frame, detection_type + " Detector", (10,20), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (50,170,50), 2)
-    cv2.putText(frame, tracker_type + " Tracker", (10,50), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (50,170,50), 2)
-    cv2.putText(frame, "FPS : " + str(int(fps)), (10,80), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (50,170,50), 2)
-    if detecting:
-        cv2.putText(frame, "Detecting", (10,110), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (50,170,50), 2)
-    if tracking:
-        cv2.putText(frame, "Tracking", (10,110), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (50,170,50), 2)
+    
+    if DEBUG:
+        cv2.putText(frame, detection_type + " Detector", (10,20), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,0), 2)
+        cv2.putText(frame, tracker_type + " Tracker", (10,50), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,0), 2)
+        cv2.putText(frame, "FPS : " + str(int(fps)), (10,80), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,0), 2)
+        if detecting:
+            cv2.putText(frame, "Detecting", (10,110), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,0), 2)
+        if tracking:
+            cv2.putText(frame, "Tracking", (10,110), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,0), 2)
     cv2.imshow("Frame", frame)
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 
 cam.stop()
 cv2.destroyAllWindows()
+
